@@ -1,36 +1,36 @@
 import PropTypes from 'prop-types';
 
-import  { Component } from 'react';
+import { useState  } from 'react';
 import { Bar,SearchForm ,Button,Input} from './Searchbar.styled';
 
-export class Searchbar extends Component {
-  state = { query: '' };
 
-  handleChange = e => {
-    this.setState({ query: e.currentTarget.value });
+export const Searchbar = (props) => {
+
+  const [query, setQuery] = useState('');
+
+  const handleChange = (e) => {
+    setQuery(e.currentTarget.value );
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
+    props.onSubmit(query);
+    };
 
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
-  };
 
-  render() {
     return (
       <Bar>
-      <SearchForm onSubmit={this.handleSubmit}>
+      <SearchForm onSubmit={handleSubmit}>
         <Input
           type="text"
-          value={this.state.query}
-          onChange={this.handleChange}
+          value={query}
+          onChange={handleChange}
         />
         <Button type="submit">Искать</Button>
       </SearchForm>
       </Bar>
     );
-  }
+
 }
 
 Searchbar.propTypes = {
