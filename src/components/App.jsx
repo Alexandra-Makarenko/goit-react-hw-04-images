@@ -3,6 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { getImages } from 'api';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { LoadMoreBtn } from './LoadMore/LoadMore';
 import { ColorRing } from 'react-loader-spinner';
 
 export const App = () => {
@@ -55,7 +56,7 @@ useEffect(() => {
        <div>
       
 <ImageGallery images = {images}/>
-{(!isLoading && (images.length>0)) && <button type='button' onClick={incrementPage}>Load more...</button>}
+{(!isLoading && (images.length>=12)) && <LoadMoreBtn onClick={incrementPage}/>}
 {(isLoading ) && <ColorRing
 visible={true}
 height="80"
