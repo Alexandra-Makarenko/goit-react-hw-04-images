@@ -5,28 +5,22 @@ import { createPortal } from 'react-dom';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = (props)=> {
-  // componentDidMount() {
-  //  window.addEventListener('keydown', this.handleKeyDown);
-  // }
-  useEffect(() => {
-    window.addEventListener('keydown', e => {
+export const Modal = (props) => {
+  
+   useEffect(() => {
+    const handleKeyDown = e => {
       if (e.code === 'Escape') {
        props.onClose();
-      }
-    });
-  }, [props]);
-
-  
-  useEffect(() => {
-       return () => {
-      window.removeEventListener('keydown',  e => {
-        if (e.code === 'Escape') {
-         props.onClose();
-        }
-      });
+       }       
+     };
+ 
+     window.addEventListener('keydown', handleKeyDown);
+     return () => {
+      window.addEventListener('keydown', handleKeyDown);
     };
   }, [props]);
+ 
+
 
   
   const handleBackdropClick = event => {
